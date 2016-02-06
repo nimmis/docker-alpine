@@ -168,5 +168,5 @@ This image only contains the latest versions of Apline, the versions are
 nimmis/microbase:<tag> where tag is
 
 - latest -  this gives the latest version (atm 3.3)
-
+  3.3    -  this gives version 3.3
 
