@@ -167,10 +167,10 @@ Accessing the container with a shell can be done with
 This image only contains the latest versions of Apline, the versions are
 nimmis/microbase:<tag> where tag is
 
-- latest -  this gives the latest version (atm 3.3)
-- 3.3    -  this gives version 3.3
-- 3.2    -  this gives version 3.2
-- 3.1    -  this gives version 3.1
-- 2.7    -  this gives version 2.7
-- 2.6    -  this gives version 2.6
-- edge   -  this gives the edge version
+| Tag    | Alpine version | size |
+| ------ | -------------- | ---- |
+| latest |  latest/3.3    | [![](https://badge.imagelayers.io/nimmis/alpine:latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest) | 
+| 3.3    |  3.3           | [![](https://badge.imagelayers.io/nimmis/alpine:3.3.svg)](https://imagelayers.io/?images=nimmis/alpine:3.3) |
+| 3.2    |  3.2           | [![](https://badge.imagelayers.io/nimmis/alpine:3.2.svg)](https://imagelayers.io/?images=nimmis/alpine:3.2) |
+| 3.1    |  3.1           | [![](https://badge.imagelayers.io/nimmis/alpine:3.1.svg)](https://imagelayers.io/?images=nimmis/alpine:3.1) |
+| edge   |  edge          | [![](https://badge.imagelayers.io/nimmis/alpine:edge.svg)](https://imagelayers.io/?images=nimmis/alpine:edge) |
