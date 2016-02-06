@@ -36,17 +36,17 @@ executing `docker logs <container id>`
 ### cron daemon
 
 In many cases there are som need of things happening att given intervalls, default no cron processs is started
-in the standard ubuntu image. In this image cron is running together with logrotate to stop the logdfiles to be
+in standard images. In this image cron is running together with logrotate to stop the logdfiles to be
 to big on log running containers.
 
-### syslog-ng
+### rsyslogd
 
 No all services works without a syslog daemon, if you don't have one running those messages is lost in space,
 all messages sent via the syslog daemon is saved in /var/log/syslog
 
 ### Docker fixes 
 
-Also there are fixed (besideds the init process) assosiated with running ubuntu inside a docker container.
+Also there are fixed (besideds the init process) assosiated with running linux inside a docker container.
 
 ### New commands autostarted by supervisord
 
@@ -98,31 +98,31 @@ or output from script
 	/usr/local/bin/myscript >> /var/log/startlog.log
 
 
-	> docker run -d --name ubuntu nimmis/ubuntu
-	> docker logs ubuntu
+	> docker run -d --name microbase nimmis/microbase
+	> docker logs microbase
 	*** open logfile
 	*** Run files in /etc/my_runonce/
 	*** Run files in /etc/my_runalways/
 	*** Running /etc/rc.local...
 	*** Booting supervisor daemon...
-	*** Supervisor started as PID 9
+	*** Supervisor started as PID 6
 	2015-08-04 11:34:06,763 CRIT Set uid to user 0
 	*** Started processes via Supervisor......
-	crond                            RUNNING    pid 13, uptime 0:00:04
-	syslog-ng                        RUNNING    pid 12, uptime 0:00:04
+	crond                            RUNNING    pid 9, uptime 0:00:04
+	rsyslogd                         RUNNING    pid 10, uptime 0:00:04
 
-	> docker exec ubuntu sh -c 'echo "Testmessage to log" >> /var/log/startup.log'
-	> docker logs ubuntu
+	> docker exec microbase sh -c 'echo "Testmessage to log" >> /var/log/startup.log'
+	> docker logs microbase
         *** open logfile
         *** Run files in /etc/my_runonce/
         *** Run files in /etc/my_runalways/
         *** Running /etc/rc.local...
         *** Booting supervisor daemon...
-        *** Supervisor started as PID 9
+        *** Supervisor started as PID 6
         2015-08-04 11:34:06,763 CRIT Set uid to user 0
         *** Started processes via Supervisor......
-        crond                            RUNNING    pid 13, uptime 0:00:04
-        syslog-ng                        RUNNING    pid 12, uptime 0:00:04
+        crond                            RUNNING    pid 9, uptime 0:00:04
+        syslog-ng                        RUNNING    pid 10, uptime 0:00:04
 
 	*** Log: Testmessage to log
         >
@@ -147,46 +147,45 @@ Extra included packages are
 
 This continer should normaly run as a daemon i.e with the `-d` flag attached
 
-	docker run -d nimmis/ubuntu
+	docker run -d nimmis/microbase
 
 but if you want to check if all services has been started correctly you can start with the following command
 
-	docker run -ti nimmis/ubuntu
+	docker run -ti nimmis/microbase
 
 the output, if working correctly should be
 
-	docker run -ti nimmis/ubuntu14
+	docker run -ti nimmis/microbase
 	*** open logfile
 	*** Run files in /etc/my_runonce/
 	*** Run files in /etc/my_runalways/
 	*** Running /etc/rc.local...
 	*** Booting supervisor daemon...
-	*** Supervisor started as PID 11
+	*** Supervisor started as PID 7
 	2015-01-02 10:45:43,750 CRIT Set uid to user 0
+	crond[10]: crond (busybox 1.24.1) started, log level 8
 	*** Started processes via Supervisor......
-	crond                            RUNNING    pid 15, uptime 0:00:02
-	syslog-ng                        RUNNING    pid 14, uptime 0:00:02
+	crond                            RUNNING    pid 10, uptime 0:00:04
+	syslog-ng                        RUNNING    pid 11, uptime 0:00:04
 
 pressing a CTRL-C in that window  or running `docker stop <container ID>` will generate the following output
 
-	*** Shutting down supervisor daemon (PID 11)...
+	*** Shutting down supervisor daemon (PID 7)...
 	*** Killing all processes...
 
 you can the restart that container with 
 
 	docker start <container ID>
 
-Accessing the container with a bash shell can be done with
+Accessing the container with a shell can be done with
 
-	docker exec -ti <container ID> /bin/bash
+	docker exec -ti <container ID> /bin/sh
 
 ### TAGs
 
-This image only contains the 2 latest LTS versions of Ubuntu 12.04 and 14.04, the versions are
-nimmis/ubuntu:<tag> where tag is
+This image only contains the latest versions of Apline, the versions are
+nimmis/microbase:<tag> where tag is
 
-- latest -  this gives the latest LTS version (14.04)
-- 12.04  -  this gives the 12.04 LTS version
-- 14.04  -  this gives the 14.04 LTS version
+- latest -  this gives the latest version (atm 3.3)
 
 
