@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 
 MAINTAINER nimmis <kjell.havneskold@gmail.com>
 
