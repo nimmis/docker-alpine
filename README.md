@@ -124,22 +124,6 @@ or output from script
 
 	*** Log: Testmessage to log
         >
-### Added some normaly used commands
-
-There are a number of commands that most uses and adds to their build, in this build I've added som commonly used packages
-
-Extra included packages are
-
-- wget
-- curl
-- zip/unzip
-- git
-- vim
-- nano
-- psmisc
-- less
-- patch
-- software-properties-common
 
 ### Installation
 
