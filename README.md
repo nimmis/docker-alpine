@@ -1,7 +1,10 @@
 ## microcontainer based on Alpine with working init process
  [![Docker Hub; nimmis/alpine](https://img.shields.io/badge/dockerhub-nimmis%2Falpine-green.svg)](https://registry.hub.docker.com/u/nimmis/alpine)
+ [![Image Size](https://img.shields.io/imagelayers/image-size/nimmis/alpine/latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest)
+ [![Image Layers](https://img.shields.io/imagelayers/layers/nimmis/alpine/latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest)
 
-This is a very small container (58 Mb) but still have a working init process, crond and syslog.
+https://img.shields.io/imagelayers/image-size/gliderlabs/
+This is a very small container (54 Mb) but still have a working init process, crond and syslog.
 
 ### Why use this image
 
