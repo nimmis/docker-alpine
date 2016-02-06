@@ -1,5 +1,5 @@
 ## microcontainer based on Alpine with working init process
- [![Docker Hub; nimmis/microbase](https://img.shields.io/badge/dockerhub-nimmis%2Fmicrobase-green.svg)](https://registry.hub.docker.com/u/nimmis/microbase)
+ [![Docker Hub; nimmis/alpine](https://img.shields.io/badge/dockerhub-nimmis%2Falpine-green.svg)](https://registry.hub.docker.com/u/nimmis/alpine)
 
 This is a very small container (58 Mb) but still have a working init process, crond and syslog.
 
@@ -98,12 +98,11 @@ or output from script
 	/usr/local/bin/myscript >> /var/log/startlog.log
 
 
-	> docker run -d --name microbase nimmis/microbase
+	> docker run -d --name alpine nimmis/alpine
 	> docker logs microbase
 	*** open logfile
 	*** Run files in /etc/my_runonce/
 	*** Run files in /etc/my_runalways/
-	*** Running /etc/rc.local...
 	*** Booting supervisor daemon...
 	*** Supervisor started as PID 6
 	2015-08-04 11:34:06,763 CRIT Set uid to user 0
@@ -111,22 +110,21 @@ or output from script
 	crond                            RUNNING    pid 9, uptime 0:00:04
 	rsyslogd                         RUNNING    pid 10, uptime 0:00:04
 
-	> docker exec microbase sh -c 'echo "Testmessage to log" >> /var/log/startup.log'
-	> docker logs microbase
+	> docker exec alpine sh -c 'echo "Testmessage to log" >> /var/log/startup.log'
+	> docker logs alpine
         *** open logfile
         *** Run files in /etc/my_runonce/
         *** Run files in /etc/my_runalways/
-        *** Running /etc/rc.local...
         *** Booting supervisor daemon...
         *** Supervisor started as PID 6
         2015-08-04 11:34:06,763 CRIT Set uid to user 0
         *** Started processes via Supervisor......
         crond                            RUNNING    pid 9, uptime 0:00:04
-        syslog-ng                        RUNNING    pid 10, uptime 0:00:04
+        rsyslogd                         RUNNING    pid 10, uptime 0:00:04
 
 	*** Log: Testmessage to log
         >
-### Added som normaly used commands
+### Added some normaly used commands
 
 There are a number of commands that most uses and adds to their build, in this build I've added som commonly used packages
 
@@ -147,26 +145,25 @@ Extra included packages are
 
 This continer should normaly run as a daemon i.e with the `-d` flag attached
 
-	docker run -d nimmis/microbase
+	docker run -d nimmis/alpine
 
 but if you want to check if all services has been started correctly you can start with the following command
 
-	docker run -ti nimmis/microbase
+	docker run -ti nimmis/alpine
 
 the output, if working correctly should be
 
-	docker run -ti nimmis/microbase
+	docker run -ti nimmis/alpine
 	*** open logfile
 	*** Run files in /etc/my_runonce/
 	*** Run files in /etc/my_runalways/
-	*** Running /etc/rc.local...
 	*** Booting supervisor daemon...
 	*** Supervisor started as PID 7
 	2015-01-02 10:45:43,750 CRIT Set uid to user 0
 	crond[10]: crond (busybox 1.24.1) started, log level 8
 	*** Started processes via Supervisor......
 	crond                            RUNNING    pid 10, uptime 0:00:04
-	syslog-ng                        RUNNING    pid 11, uptime 0:00:04
+	rsyslogd                         RUNNING    pid 11, uptime 0:00:04
 
 pressing a CTRL-C in that window  or running `docker stop <container ID>` will generate the following output
 
