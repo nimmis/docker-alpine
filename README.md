@@ -2,7 +2,7 @@
 
 [![](https://badge.imagelayers.io/nimmis/alpine:latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest)
 
-This is a very small container (54 Mb) but still have a working init process, crond and syslog. This is the base image for all my other microcontainers
+This is a very small container (51 Mb) but still have a working init process, crond and syslog. This is the base image for all my other microcontainers
 
 ### Why use this image
 
