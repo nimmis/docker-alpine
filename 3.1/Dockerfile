@@ -2,15 +2,7 @@ FROM alpine:3.1
 
 MAINTAINER nimmis <kjell.havneskold@gmail.com>
 
-
-# configure supervisor
-ADD ./supervisor/supervisord.conf /etc/
-ADD ./supervisor/supervisor.d/crond.conf /etc/supervisor.d/
-ADD ./supervisor/supervisor.d/rsyslogd.conf /etc/supervisor.d/
-
-# Add my_init script and help scripts 
-ADD bin/my_init /
-ADD bin/my_service /
+COPY rootfs/ /
 
 RUN apk update && apk upgrade && \
     apk add ca-certificates supervisor rsyslog supervisor && \
@@ -21,9 +13,6 @@ RUN apk update && apk upgrade && \
 
 # Set environment variables.
 ENV HOME /root
-
-# Define working directory.
-WORKDIR /root
 
 # Define default command.
 CMD ["/my_init"]
