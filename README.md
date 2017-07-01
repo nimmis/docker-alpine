@@ -170,8 +170,10 @@ nimmis/alpine:<tag> where tag is
 
 | Tag    | Alpine version | size |
 | ------ | -------------- | ---- |
-| latest |  latest/3.4    | [![](https://badge.imagelayers.io/nimmis/alpine:latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest) | 
-| 3.4    |  3.4           | [![](https://badge.imagelayers.io/nimmis/alpine:3.3.svg)](https://imagelayers.io/?images=nimmis/alpine:3.3) |
+| latest |  latest/3.5    | [![](https://badge.imagelayers.io/nimmis/alpine:latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest) | 
+| 3.6    |  3.6           | [![](https://badge.imagelayers.io/nimmis/alpine:3.6.svg)](https://imagelayers.io/?images=nimmis/alpine:3.6) |
+| 3.5    |  3.5           | [![](https://badge.imagelayers.io/nimmis/alpine:3.5.svg)](https://imagelayers.io/?images=nimmis/alpine:3.5) |
+| 3.4    |  3.4           | [![](https://badge.imagelayers.io/nimmis/alpine:3.4.svg)](https://imagelayers.io/?images=nimmis/alpine:3.4) |
 | 3.3    |  3.3           | [![](https://badge.imagelayers.io/nimmis/alpine:3.3.svg)](https://imagelayers.io/?images=nimmis/alpine:3.3) |
 | 3.2    |  3.2           | [![](https://badge.imagelayers.io/nimmis/alpine:3.2.svg)](https://imagelayers.io/?images=nimmis/alpine:3.2) |
 | 3.1    |  3.1           | [![](https://badge.imagelayers.io/nimmis/alpine:3.1.svg)](https://imagelayers.io/?images=nimmis/alpine:3.1) |
