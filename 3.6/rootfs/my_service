@@ -1,0 +1,142 @@
+#!/usr/bin/python
+
+import os, signal, sys, subprocess
+
+KILL_PROCESS_TIMEOUT = 5
+
+LOG_LEVEL_ERROR = 1
+LOG_LEVEL_WARN  = 1
+LOG_LEVEL_INFO  = 2
+LOG_LEVEL_DEBUG = 3
+
+log_level = None
+
+
+terminated_child_processes = {}
+
+def error(message):
+        if log_level >= LOG_LEVEL_ERROR:
+                sys.stderr.write("*** %s\n" % message)
+
+def warn(message):
+        if log_level >= LOG_LEVEL_WARN:
+                sys.stderr.write("*** %s\n" % message)
+
+def info(message):
+        if log_level >= LOG_LEVEL_INFO:
+                sys.stderr.write("*** %s\n" % message)
+
+def debug(message):
+        if log_level >= LOG_LEVEL_DEBUG:
+                sys.stderr.write("*** %s\n" % message)
+
+def is_exe(path):
+        try:
+                return os.path.isfile(path) and os.access(path, os.X_OK)
+        except OSError:
+                return False
+
+# Waits for the child process with the given PID, while at the same time
+# reaping any other child processes that have exited (e.g. adopted child
+# processes that have terminated).
+def waitpid_reap_other_children(pid):
+        global terminated_child_processes
+
+        status = terminated_child_processes.get(pid)
+        if status:
+                # A previous call to waitpid_reap_other_children(),
+                # with an argument not equal to the current argument,
+                # already waited for this process. Return the status
+                # that was obtained back then.
+                del terminated_child_processes[pid]
+                return status
+
+        done = False
+        status = None
+        while not done:
+                try:
+                        this_pid, status = os.waitpid(-1, 0)                                                                                                                                                                
+                        if this_pid == pid:                                                                                                                                                                                 
+                                done = True                                                                                                                                                                                 
+                        else:                                                                                                                                                                                               
+                                # Save status for later.                                                                                                                                                                    
+                                terminated_child_processes[this_pid] = status                                                                                                                                               
+                except OSError as e:                                                                                                                                                                                        
+                        if e.errno == errno.ECHILD or e.errno == errno.ESRCH:                                                                                                                                               
+                                return None                                                                                                                                                                                 
+                        else:                                                                                                                                                                                               
+                                raise                                                                                                                                                                                       
+        return status     
+def run_command_killable(*argv):
+        filename = argv[0]
+        status = None
+        pid = os.spawnvp(os.P_NOWAIT, filename, argv)
+        try:
+                status = waitpid_reap_other_children(pid)
+        except BaseException as s:
+                warn("An error occurred. Aborting.")
+                stop_child_process(filename, pid)
+                raise
+        if status != 0:
+                if status is None:
+                        error("%s exited with unknown status\n" % filename)
+                else:
+                        error("%s failed with status %d\n" % (filename, os.WEXITSTATUS(status)))
+                sys.exit(1)
+
+def stop_child_process(name, pid, signo = signal.SIGTERM, time_limit = KILL_PROCESS_TIMEOUT):
+        info("Shutting down %s (PID %d)..." % (name, pid))
+        try:
+                os.kill(pid, signo)
+        except OSError:
+                pass
+        signal.alarm(time_limit)
+        try:
+                try:
+                        waitpid_reap_other_children(pid)
+                except OSError:
+                        pass
+        except AlarmException:
+                warn("%s (PID %d) did not shut down in time. Forcing it to exit." % (name, pid))
+                try:
+                        os.kill(pid, signal.SIGKILL)
+                except OSError:
+                        pass
+                try:
+                        waitpid_reap_other_children(pid)
+                except OSError:
+                        pass
+        finally:
+                signal.alarm(0)
+#
+# execute "service <service> stop" on kill singel
+#
+
+def signal_handler(signal, frame):
+	return_code = subprocess.call("service "+sys.argv[1]+" stop", shell=True)
+	sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGTERM, signal_handler)
+
+if (len(sys.argv) < 2 or len(sys.argv) > 3) :
+        sys.exit('Usage: %s service [post service start command]' % sys.argv[0])
+
+#
+# execute "service <service> start" on startup
+#
+
+return_code = subprocess.call("service "+sys.argv[1]+" start", shell=True)
+
+
+if (return_code == 0):
+	# if there is a second argument, execute that command now
+	if (len(sys.argv) == 3):
+		postproc=sys.argv[2]
+		if is_exe(postproc):
+			print('Running ...' , postproc)
+			run_command_killable(postproc)
+	# wait for kill signal
+	signal.pause()
+
+
