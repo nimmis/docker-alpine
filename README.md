@@ -170,11 +170,12 @@ nimmis/alpine:<tag> where tag is
 
 | Tag    | Alpine version | size |
 | ------ | -------------- | ---- |
-| latest |  latest/3.5    | [![](https://badge.imagelayers.io/nimmis/alpine:latest.svg)](https://imagelayers.io/?images=nimmis/alpine:latest) | 
-| 3.6    |  3.6           | [![](https://badge.imagelayers.io/nimmis/alpine:3.6.svg)](https://imagelayers.io/?images=nimmis/alpine:3.6) |
-| 3.5    |  3.5           | [![](https://badge.imagelayers.io/nimmis/alpine:3.5.svg)](https://imagelayers.io/?images=nimmis/alpine:3.5) |
-| 3.4    |  3.4           | [![](https://badge.imagelayers.io/nimmis/alpine:3.4.svg)](https://imagelayers.io/?images=nimmis/alpine:3.4) |
-| 3.3    |  3.3           | [![](https://badge.imagelayers.io/nimmis/alpine:3.3.svg)](https://imagelayers.io/?images=nimmis/alpine:3.3) |
-| 3.2    |  3.2           | [![](https://badge.imagelayers.io/nimmis/alpine:3.2.svg)](https://imagelayers.io/?images=nimmis/alpine:3.2) |
-| 3.1    |  3.1           | [![](https://badge.imagelayers.io/nimmis/alpine:3.1.svg)](https://imagelayers.io/?images=nimmis/alpine:3.1) |
-| edge   |  edge          | [![](https://badge.imagelayers.io/nimmis/alpine:edge.svg)](https://imagelayers.io/?images=nimmis/alpine:edge) |
+| latest |  latest/3.6    | [![](https://images.microbadger.com/badges/image/nimmis/alpine.svg)](https://microbadger.com/images/nimmis/alpine "Get your own image badge on microbadger.com") |
+| test |  latest/3.7    | [![](https://images.microbadger.com/badges/image/nimmis/alpine:test.svg)](https://microbadger.com/images/nimmis/alpine:test "Get your own image badge on microbadger.com") |
+| 3.6    |  3.6           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.6.svg)](https://microbadger.com/images/nimmis/alpine:3.6 "Get your own image badge on microbadger.com") |
+| 3.5    |  3.5           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.5.svg)](https://microbadger.com/images/nimmis/alpine:3.5 "Get your own image badge on microbadger.com") |
+| 3.4    |  3.4           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.4.svg)](https://microbadger.com/images/nimmis/alpine:3.4 "Get your own image badge on microbadger.com") |
+| 3.3    |  3.3           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.3.svg)](https://microbadger.com/images/nimmis/alpine:3.3 "Get your own image badge on microbadger.com") |
+| 3.2    |  3.2           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.2.svg)](https://microbadger.com/images/nimmis/alpine:3.2 "Get your own image badge on microbadger.com") |
+| 3.1    |  3.1           | [![](https://images.microbadger.com/badges/image/nimmis/alpine:3.1.svg)](https://microbadger.com/images/nimmis/alpine:3.1 "Get your own image badge on microbadger.com") |
+| edge   |  edge          | [![](https://images.microbadger.com/badges/image/nimmis/alpine:edge.svg)](https://microbadger.com/images/nimmis/alpine:edge "Get your own image badge on microbadger.com") |
